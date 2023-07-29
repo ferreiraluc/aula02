@@ -7,10 +7,14 @@ public class Main {
         List<Pessoa> pessoas = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("==================================== ");
-        System.out.println("Digite a quantidade de pessoas que deseja cadastrar: ");
+        String mensagem = "Cadastro de pessoas e endereço";
+        String linha = "====================================";
+        System.out.println("\n" + linha);
+        System.out.println("= " + mensagem + " =");
+        System.out.println(linha);
+        System.out.println("\nDigite o número de pessoas que deseja cadastrar: ");
         int qtdPessoas = scanner.nextInt();
-        System.out.println("==================================== ");
+
 
 
         // Cadastrar pessoas com n endereços
@@ -24,10 +28,10 @@ public class Main {
 
             List<Endereco> enderecos = new ArrayList<>();
             for (int j = 0; j < qtdEndereco; j++) {
-                System.out.println("Digite o endereço " + (j + 1) + ":");
+                System.out.println("Digite o endereço:");
                 String rua = scanner.next();
-                System.out.println("Digite o número do endereço " + (j + 1) + ":");
-                int numero = scanner.nextInt(); // Corrigido aqui
+                System.out.println("Digite o número do endereço:");
+                int numero = scanner.nextInt();
                 enderecos.add(new Endereco(rua, numero));
             }
 
