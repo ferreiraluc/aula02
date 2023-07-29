@@ -1,57 +1,67 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-
-        List<Endereco> enderecos = new ArrayList<>();
-        Pessoa lucas = new Pessoa("lucas", 25, enderecos);
         List<Pessoa> pessoas = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
 
-        for(int i=0; i<3; i++){
+        System.out.println("==================================== ");
+        System.out.println("Digite a quantidade de pessoas que deseja cadastrar: ");
+        int qtdPessoas = scanner.nextInt();
+        System.out.println("==================================== ");
+
+
+        // Cadastrar pessoas com n endereços
+        for (int i = 0; i < qtdPessoas; i++) {
             System.out.println("Digite o nome: ");
-            pessoas.add(new Pessoa(scanner.next(), scanner.nextInt(), enderecos));
-        }
+            String nome = scanner.next();
+            System.out.println("Digite a idade: ");
+            int idade = scanner.nextInt();
+            System.out.println("Digite a quantidade de endereços: ");
+            int qtdEndereco = scanner.nextInt();
 
-        for(int i=0; i<pessoas.size(); i++){
-            System.out.println((pessoas.get(i).getNome()));
-        }
-
-        List<Pessoa> pessoas1 = new ArrayList<>();
-        List<Endereco> enderecos1 = new ArrayList<>();
-        Scanner sc = new Scanner(System.in);
-        for(int i=0; i<2; i++){
-            String nome = sc.next();
-            int idade = sc.nextInt();
-            int qtdEndereco = sc.nextInt();
-            for(int j=0; j<qtdEndereco; j++){
-                enderecos.add(new Endereco(sc.next(), sc.nextInt()));
+            List<Endereco> enderecos = new ArrayList<>();
+            for (int j = 0; j < qtdEndereco; j++) {
+                System.out.println("Digite o endereço " + (j + 1) + ":");
+                String rua = scanner.next();
+                System.out.println("Digite o número do endereço " + (j + 1) + ":");
+                int numero = scanner.nextInt(); // Corrigido aqui
+                enderecos.add(new Endereco(rua, numero));
             }
+
             pessoas.add(new Pessoa(nome, idade, enderecos));
-            enderecos.clear();
         }
 
-        List<Pessoa> pessoas2 = new ArrayList<>();
-        List<Endereco> enderecos2 = new ArrayList<>();
-        Endereco end1 = new Endereco("rua1", 1);
-        Endereco end2 = new Endereco("rua2", 2);
-        enderecos2.add(end1); enderecos2.add(end2);
-        pessoas2.add(new Pessoa("will", 32, enderecos2));
+        // Criar uma lista de pessoas
+        for (Pessoa pessoa : pessoas) {
+            System.out.println("Nome: " + pessoa.getNome());
+            System.out.println("Idade: " + pessoa.getIdade());
+            List<Endereco> enderecos = pessoa.getEnderecos();
+            System.out.println("Endereços:");
+            for (Endereco endereco : enderecos) {
+                System.out.println(endereco.getRua() + ", " + endereco.getNumero());
+            }
+            System.out.println();
+        }
 
+        // Buscar uma pessoa pelo nome e imprimir os dados na tela
+        System.out.println("Digite o nome da pessoa que deseja buscar: ");
+        String nomeBuscado = scanner.next();
+        for (Pessoa pessoa : pessoas) {
+            if (pessoa.getNome().equalsIgnoreCase(nomeBuscado)) {
+                System.out.println("Nome: " + pessoa.getNome());
+                System.out.println("Idade: " + pessoa.getIdade());
+                List<Endereco> enderecos = pessoa.getEnderecos();
+                System.out.println("Endereços:");
+                for (Endereco endereco : enderecos) {
+                    System.out.println(endereco.getRua() + ", " + endereco.getNumero());
+                }
+                return;
+            }
+        }
 
-
-
-
-//        for(Pessoa x:pessoas){
-  //          System.out.println(x.getNome());
-    //    }
-
-
+        System.out.println("Pessoa com o nome " + nomeBuscado + " não encontrada.");
     }
 }
